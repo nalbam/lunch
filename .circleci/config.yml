@@ -1,0 +1,27 @@
+version: 2
+jobs:
+  choice:
+    docker:
+      - image: opspresso/builder
+    working_directory: /tmp/workspace
+    steps:
+      - checkout
+      - run:
+          name: Check Charts Versions
+          command: ./choice.sh $SLACK_TOKEN
+
+workflows:
+  version: 2
+  apply:
+    jobs:
+      - choice
+  nightly:
+    jobs:
+      - choice
+    triggers:
+      - schedule:
+          cron: "0 0 * * *"
+          filters:
+            branches:
+              only:
+                - master
