@@ -20,7 +20,7 @@ workflows:
       - choice
     triggers:
       - schedule:
-          cron: "0 0 * * *"
+          cron: "50 2 * * *"
           filters:
             branches:
               only:
