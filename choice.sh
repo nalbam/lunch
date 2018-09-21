@@ -29,5 +29,5 @@ echo "menu: ${WORD}"
 
 if [ ! -z ${SLACK_TOKEN} ]; then
     ${SHELL_DIR}/slack.sh --token="${SLACK_TOKEN}" \
-        --color="good" --title="오늘의 메뉴" --emoji=":fork_and_knife:" "\`${WORD}\`"
+        --color="good" --title="오늘의 식당" --emoji=":fork_and_knife:" "\`${WORD}\`"
 fi
