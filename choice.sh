@@ -25,7 +25,7 @@ if [ -z ${WORD} ]; then
     WORD="diet"
 fi
 
-echo "menu: ${WORD}"
+echo "menu: ${RND} ${WORD}"
 
 if [ ! -z ${SLACK_TOKEN} ]; then
     ${SHELL_DIR}/slack.sh --token="${SLACK_TOKEN}" \
