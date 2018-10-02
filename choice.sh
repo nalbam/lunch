@@ -9,9 +9,11 @@ SLACK_TOKEN=${1}
 MENU=${SHELL_DIR}/menu.txt
 COUNT=$(cat ${MENU} | wc -l)
 
+# for delay
 mkdir -p ${SHELL_DIR}/target
 curl -sL https://raw.githubusercontent.com/nalbam/lunch/master/menu.txt > ${SHELL_DIR}/target/menu.txt
 
+# random number
 if [ "${OS_NAME}" == "linux" ]; then
     RND=$(shuf -i 1-${COUNT} -n 1)
 elif [ "${OS_NAME}" == "darwin" ]; then
@@ -20,10 +22,10 @@ else
     RND=
 fi
 
+# get one
 if [ ! -z ${RND} ]; then
     WORD=$(sed -n ${RND}p ${MENU})
 fi
-
 if [ -z ${WORD} ]; then
     WORD="diet"
 fi
