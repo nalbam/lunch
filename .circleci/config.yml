@@ -8,7 +8,7 @@ jobs:
       - checkout
       - run:
           name: Check Charts Versions
-          command: ./choice.sh $SLACK_TOKEN
+          command: ./choice.sh
 
 workflows:
   version: 2

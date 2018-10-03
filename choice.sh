@@ -4,10 +4,9 @@ OS_NAME="$(uname | awk '{print tolower($0)}')"
 
 SHELL_DIR=$(dirname $0)
 
-SLACK_TOKEN=${1}
-
 MENU=${SHELL_DIR}/menu.txt
-COUNT=$(cat ${MENU} | wc -l)
+
+COUNT=$(cat ${MENU} | wc -l | xargs)
 
 # for delay
 mkdir -p ${SHELL_DIR}/target
@@ -24,15 +23,16 @@ fi
 
 # get one
 if [ ! -z ${RND} ]; then
-    WORD=$(sed -n ${RND}p ${MENU})
+    SELECTED=$(sed -n ${RND}p ${MENU})
 fi
-if [ -z ${WORD} ]; then
-    WORD="diet"
+if [ -z ${SELECTED} ]; then
+    SELECTED="diet"
 fi
 
-echo "menu: ${RND} ${WORD}"
+echo "menu: ${RND} ${SELECTED}"
 
 if [ ! -z ${SLACK_TOKEN} ]; then
     ${SHELL_DIR}/slack.sh --token="${SLACK_TOKEN}" \
-        --color="good" --title="오늘의 식당" --emoji=":fork_and_knife:" "\`${WORD}\`"
+        --emoji=":fork_and_knife:" --username="lunch" \
+        --color="good" --title="오늘의 식당" "\`${SELECTED}\`"
 fi
