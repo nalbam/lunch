@@ -32,7 +32,7 @@ fi
 echo "menu: ${RND} ${SELECTED}"
 
 if [ ! -z ${SLACK_TOKEN} ]; then
-    ${SHELL_DIR}/slack.sh --token="${SLACK_TOKEN}" \
+    ${SHELL_DIR}/slack.sh --token="${SLACK_TOKEN}" --channel="random" \
         --emoji=":fork_and_knife:" --username="lunch" \
         --color="good" --title="오늘의 식당" "\`${SELECTED}\`"
 fi
