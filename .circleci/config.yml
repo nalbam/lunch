@@ -12,9 +12,9 @@ jobs:
 
 workflows:
   version: 2
-  # apply:
-  #   jobs:
-  #     - choice
+  apply:
+    jobs:
+      - choice
   nightly:
     jobs:
       - choice
