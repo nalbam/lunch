@@ -44,6 +44,5 @@ echo "${MENU}"
 if [ ! -z ${SLACK_TOKEN} ]; then
     ${SHELL_DIR}/slack.sh --token="${SLACK_TOKEN}" --channel="random" \
         --color="good" --emoji=":fork_and_knife:" --username="lunch" \
-        --title="오늘의 식당" --text="${MENU}" \
-        "${MENU} ${LINK}"
+        --title="오늘의 식당" "${MENU} ${LINK}"
 fi
