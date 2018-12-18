@@ -13,26 +13,34 @@ mkdir -p ${SHELL_DIR}/target
 curl -sL https://raw.githubusercontent.com/nalbam/lunch/master/menu.txt > ${SHELL_DIR}/target/menu.txt
 
 # random number
-if [ "${OS_NAME}" == "linux" ]; then
-    RND=$(shuf -i 1-${COUNT} -n 1)
-elif [ "${OS_NAME}" == "darwin" ]; then
+if [ "${OS_NAME}" == "darwin" ]; then
     RND=$(ruby -e "p rand(1...${COUNT})")
 else
-    RND=
+    RND=$(shuf -i 1-${COUNT} -n 1)
 fi
 
 # get one
 if [ ! -z ${RND} ]; then
     SELECTED=$(sed -n ${RND}p ${MENU})
 fi
-if [ -z ${SELECTED} ]; then
-    SELECTED="diet"
+if [ "${SELECTED}" == "" ]; then
+    SELECTED="0 diet"
 fi
 
 echo "menu: ${RND} ${SELECTED}"
 
+ARR=(${SELECTED})
+
+if [ "x${ARR[0]}" == "x0" ]; then
+    MENU="\`${ARR[1]}\`"
+else
+    MENU="\`${ARR[1]}\` http://map.daum.net/?itemId=${ARR[0]}"
+fi
+
+echo "${MENU}"
+
 if [ ! -z ${SLACK_TOKEN} ]; then
     ${SHELL_DIR}/slack.sh --token="${SLACK_TOKEN}" --channel="random" \
         --emoji=":fork_and_knife:" --username="lunch" \
-        --color="good" --title="오늘의 식당" "\`${SELECTED}\`"
+        --color="good" --title="오늘의 식당" "${MENU}"
 fi
