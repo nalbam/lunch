@@ -125,9 +125,9 @@ json="{"
     if [ "${username}" != "" ]; then
         json="$json\"username\":\"${username}\","
     fi
-    if [ "${message}" != "" ]; then
-        json="$json\"text\":\"${message}\","
-    fi
+    # if [ "${message}" != "" ]; then
+    #     json="$json\"text\":\"${message}\","
+    # fi
     json="$json\"attachments\":[{"
         if [ "${color}" != "" ]; then
             json="$json\"color\":\"${color}\","
