@@ -32,9 +32,11 @@ echo "menu: ${RND} ${SELECTED}"
 ARR=(${SELECTED})
 
 if [ "x${ARR[0]}" == "x0" ]; then
+    LINK=""
     MENU="\`${ARR[1]}\`"
 else
-    MENU="\`${ARR[1]}\` http://map.daum.net/?itemId=${ARR[0]}"
+    LINK="http://map.daum.net/?itemId=${ARR[0]}"
+    MENU="\`${ARR[1]}\`"
 fi
 
 echo "${MENU}"
@@ -42,5 +44,6 @@ echo "${MENU}"
 if [ ! -z ${SLACK_TOKEN} ]; then
     ${SHELL_DIR}/slack.sh --token="${SLACK_TOKEN}" --channel="random" \
         --emoji=":fork_and_knife:" --username="lunch" \
-        --color="good" --title="오늘의 식당" "${MENU}"
+        --color="good" --title="오늘의 식당" "${MENU}" \
+        --title_link="${LINK}"
 fi
