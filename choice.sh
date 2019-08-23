@@ -8,9 +8,9 @@ MENU=${SHELL_DIR}/menu.txt
 
 COUNT=$(cat ${MENU} | wc -l | xargs)
 
-# for delay
-mkdir -p ${SHELL_DIR}/target
-curl -sL https://raw.githubusercontent.com/nalbam/lunch/master/menu.txt > ${SHELL_DIR}/target/menu.txt
+# # for delay
+# mkdir -p ${SHELL_DIR}/target
+# curl -sL https://raw.githubusercontent.com/nalbam/lunch/master/menu.txt > ${SHELL_DIR}/target/menu.txt
 
 # random number
 if [ "${OS_NAME}" == "darwin" ]; then
@@ -42,7 +42,8 @@ fi
 echo "${MENU}"
 
 if [ ! -z ${SLACK_TOKEN} ]; then
-    ${SHELL_DIR}/slack.sh --token="${SLACK_TOKEN}" --channel="random" \
-        --color="good" --emoji=":fork_and_knife:" --username="lunch" \
+    curl -sL opspresso.com/tools/slack | bash -s -- \
+        --token="${SLACK_TOKEN}" --channel="random" --username="lunch" \
+        --color="good" --emoji=":fork_and_knife:" \
         --title="오늘의 식당" "${MENU} ${LINK}"
 fi
